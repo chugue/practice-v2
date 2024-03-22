@@ -14,9 +14,18 @@ import java.util.List;
 public class BoardController {
     private final BoardPersistRepository boardPersistRepository;
 
+    @PostMapping("/board/{id}/update")
+    public String updateById (@PathVariable Integer id, BoardRequest.UpdateDTO reqDTO){
+        boardPersistRepository.updateById(id, reqDTO);
+        return "redirect:/board/"+ id;
+    }
+
+
     @GetMapping("/board/{id}/update-form")
-    public String updateForm (@PathVariable Integer id){
-        return "/board/"+ id + "/update-form";
+    public String updateForm (@PathVariable Integer id, HttpServletRequest request){
+        Board board = boardPersistRepository.findById(id);
+        request.setAttribute("board", board);
+        return "/board/update-form";
     }
 
     @PostMapping("/board/{id}/delete")

@@ -16,6 +16,12 @@ public class BoardPersistRepository {
     private final EntityManager em;
 
     @Transactional
+    public void updateById (Integer id, BoardRequest.UpdateDTO reqDTO){
+        Board board = findById(id);
+        board.update(reqDTO);
+    }
+
+    @Transactional
     public void deleteById(Integer id){
         String q = """
                 delete from Board b where b.id = :id
