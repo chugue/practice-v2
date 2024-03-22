@@ -22,6 +22,16 @@ public class BoardPersistRepositoryTest {
 
 
     @Test
+    public void findById_test(){
+        // given
+        int id = 2;
+        // when
+        Board board = em.find(Board.class, id);
+        // then
+        System.out.println(board.toString());
+    }
+
+    @Test
     public void findAll_test(){
         // given
 

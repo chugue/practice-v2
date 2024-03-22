@@ -15,6 +15,11 @@ import java.util.List;
 public class BoardPersistRepository {
     private final EntityManager em;
 
+    public Board findById (int id){
+        Board board = em.find(Board.class, id);
+        return board;
+    }
+
     @Transactional
     public Board save (Board board){
         // board는 여기에서는 비영속 객체
