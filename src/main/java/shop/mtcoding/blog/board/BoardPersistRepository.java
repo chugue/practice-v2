@@ -15,6 +15,17 @@ import java.util.List;
 public class BoardPersistRepository {
     private final EntityManager em;
 
+    @Transactional
+    public void deleteById(Integer id){
+        String q = """
+                delete from Board b where b.id = :id
+                """;
+        Query query = em.createQuery(q);
+        query.setParameter("id", id);
+        query.executeUpdate();
+    }
+
+
     public Board findById (int id){
         Board board = em.find(Board.class, id);
         return board;

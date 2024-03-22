@@ -14,6 +14,17 @@ import java.util.List;
 public class BoardController {
     private final BoardPersistRepository boardPersistRepository;
 
+    @GetMapping("/board/{id}/update-form")
+    public String updateForm (@PathVariable Integer id){
+        return "/board/"+ id + "/update-form";
+    }
+
+    @PostMapping("/board/{id}/delete")
+    public String deleteById (@PathVariable Integer id){
+        boardPersistRepository.deleteById(id);
+        return "redirect:/";
+    }
+
     @GetMapping("/" )
     public String index(HttpServletRequest request) {
         List<Board> boardList = boardPersistRepository.findAll();
